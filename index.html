@@ -1,757 +1,1455 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="HOVwwJNBXZU8DXH5qahA-OqwqjIeVN5L3ZVIPjeteLQ" />
-    <title>WEPSYTE | Psychologiebasiertes Webdesign</title>
-    <style>
-        :root {
-            --primary: #2B9EC9;
-            --secondary: #4f5d75;
-            --accent: #94c5d8;
-            --light: #f0f5f9;
-            --dark: #2e3440;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        header {
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--secondary);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        nav a:hover {
-            color: var(--primary);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .cta-button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(43, 158, 201, 0.2);
-        }
-        
-        .cta-button:hover {
-            background-color: #2183ab;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(43, 158, 201, 0.3);
-        }
-        .aufbau{
-            background-color: #37474F;
-            color: white;
-            font-size: larger;
-            width: 100%;
-            height: auto;
-            position: fixed;
-            top: 20vh;
-            text-align: center;
-            z-index: 99;
-        }
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 2rem 5%;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            width: 50%;
-            z-index: 10;
-            padding-top: 4rem;
-        }
-        
-        .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            color: var(--dark);
-            font-weight: 700;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: var(--secondary);
-            max-width: 90%;
-        }
-        
-        .highlight {
-            color: var(--primary);
-        }
-        
-        .brain-graphic {
-            width: 50%;
-            position: absolute;
-            right: -5%;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 5;
-            opacity: 0.85;
-        }
-        
-        .services {
-            padding: 6rem 5%;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--dark);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .service-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .service-card p {
-            color: var(--secondary);
-            font-size: 1rem;
-        }
-        
-        .process {
-            padding: 6rem 5%;
-            background-color: var(--light);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .process-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 4rem;
-            position: relative;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .process-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 22%;
-            z-index: 2;
-        }
-        
-        .step-number {
-            background-color: var(--primary);
-            color: white;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 5px 15px rgba(43, 158, 201, 0.3);
-        }
-        
-        .process-step h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .process-step p {
-            color: var(--secondary);
-            font-size: 0.95rem;
-        }
-        
-        .process-line {
-            position: absolute;
-            top: 25px;
-            left: 10%;
-            width: 80%;
-            height: 2px;
-            background-color: var(--accent);
-            z-index: 1;
-        }
-        
-        .testimonials {
-            padding: 6rem 5%;
-            background-color: white;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .testimonial-card {
-            background-color: var(--light);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 1rem;
-            background-color: var(--accent);
-        }
-        
-        .author-info h4 {
-            font-size: 1.1rem;
-            color: var(--dark);
-        }
-        
-        .author-info p {
-            font-size: 0.9rem;
-            color: var(--secondary);
-        }
-        
-        .contact {
-            padding: 6rem 5%;
-            background-color: var(--dark);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contact-section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: white;
-        }
-        
-        .contact-container {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .contact-info {
-            width: 45%;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-        }
-        
-        .contact-detail {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 1rem;
-            color: var(--primary);
-        }
-        
-        .contact-form {
-            width: 50%;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: rgba(255, 255, 255, 0.03);
-            color: white;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(43, 158, 201, 0.2);
-            display: inline-block;
-        }
-        
-        .submit-button:hover {
-            background-color: #2183ab;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(43, 158, 201, 0.3);
-        }
-        
-        footer {
-            background-color: #1f2631;
-            color: white;
-            padding: 2rem 5%;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            color: var(--accent);
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        .footer-bottom {
-            margin-top: 2rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-        
-        /* Neural network animation */
-        .neural-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            z-index: 1;
-        }
-        
-        .node {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background-color: var(--primary);
-            border-radius: 50%;
-        }
-        
-        .connection {
-            position: absolute;
-            height: 1px;
-            background-color: var(--primary);
-            transform-origin: left center;
-        }
-        
-        /* Animations */
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes pulse {
-            0% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            100% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .hero-content {
-                width: 60%;
-            }
-            
-            .brain-graphic {
-                width: 45%;
-                right: -10%;
-            }
-            
-            .process-steps {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 2rem;
-            }
-            
-            .process-step {
-                width: 45%;
-            }
-            
-            .process-line {
-                display: none;
-            }
-            
-            .contact-container {
-                flex-direction: column;
-            }
-            
-            .contact-info, .contact-form {
-                width: 100%;
-            }
-            
-            .contact-info {
-                margin-bottom: 2rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-content {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .hero p {
-                max-width: 100%;
-            }
-            
-            .brain-graphic {
-                opacity: 0.2;
-                width: 80%;
-                right: -15%;
-            }
-            
-            .process-step {
-                width: 100%;
-                margin-bottom: 2rem;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-            
-            nav ul {
-                display: none;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="HOVwwJNBXZU8DXH5qahA-OqwqjIeVN5L3ZVIPjeteLQ" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COGNUX — UX Psychology Consulting</title>
+
+  <!-- ======================================================
+       FONTS — swap Google Font families here if desired
+       Current: "Syne" (display) + "DM Sans" (body)
+  ====================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ======================================================
+       CSS CUSTOM PROPERTIES — main design tokens
+       Edit these to restyle the entire site quickly
+    ====================================================== */
+    :root {
+      --bg:          #05080f;          /* page background */
+      --surface:     #0b1120;          /* card / nav background */
+      --surface2:    #111c2e;          /* lighter surface */
+      --border:      rgba(99,179,255,.12);
+      --accent:      #3b82f6;          /* primary accent (blue) */
+      --accent2:     #06d6a0;          /* secondary accent (teal) */
+      --accent3:     #a78bfa;          /* tertiary accent (violet) */
+      --text:        #e8edf5;          /* primary text */
+      --text-muted:  #7a8fa8;          /* secondary text */
+      --font-display: 'Syne', sans-serif;
+      --font-body:   'DM Sans', sans-serif;
+      --radius:      12px;
+      --transition:  .35s cubic-bezier(.4,0,.2,1);
+      --glow:        0 0 60px rgba(59,130,246,.18);
+    }
+
+    /* ======================================================
+       RESET & BASE
+    ====================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+    ::selection { background: rgba(59,130,246,.35); color: #fff; }
+
+    /* ======================================================
+       ANIMATED GRID BACKGROUND
+       Toggle visibility by changing opacity below
+    ====================================================== */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(59,130,246,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+      opacity: 1; /* set to 0 to hide grid */
+    }
+
+    /* Floating orbs — decorative blobs, adjust colors/sizes here */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 0;
+      animation: orbFloat 20s ease-in-out infinite alternate;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(59,130,246,.14) 0%, transparent 70%);
+      top: -200px; left: -150px;
+      animation-duration: 22s;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(167,139,250,.10) 0%, transparent 70%);
+      bottom: 5%; right: -100px;
+      animation-duration: 28s;
+      animation-delay: -8s;
+    }
+    .orb-3 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(6,214,160,.08) 0%, transparent 70%);
+      top: 50%; left: 40%;
+      animation-duration: 18s;
+      animation-delay: -14s;
+    }
+    @keyframes orbFloat {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(40px, 60px) scale(1.08); }
+    }
+
+    /* ======================================================
+       LAYOUT HELPERS
+    ====================================================== */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    section { position: relative; z-index: 1; }
+
+    /* ======================================================
+       NAVBAR
+    ====================================================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5,8,15,.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    /* LOGO — change text in HTML below */
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: .08em;
+      background: linear-gradient(135deg, #fff 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-logo span { color: var(--accent); -webkit-text-fill-color: var(--accent2); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: .88rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ---- Language selector button ---- */
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .4rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: rgba(255,255,255,.04);
+      color: var(--text-muted);
+      font-size: .82rem;
+      font-family: var(--font-body);
+      font-weight: 400;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    .lang-btn:hover {
+      background: rgba(59,130,246,.1);
+      border-color: rgba(59,130,246,.4);
+      color: var(--text);
+    }
+    .lang-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Language dropdown */
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: var(--transition);
+      min-width: 140px;
+    }
+    .lang-dropdown.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+    /* ADD/REMOVE language options in the HTML <ul class="lang-dropdown"> */
+    .lang-dropdown li {
+      list-style: none;
+      padding: .6rem 1rem;
+      font-size: .85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .lang-dropdown li:hover { background: rgba(59,130,246,.12); color: var(--text); }
+    .lang-dropdown li.active { color: var(--accent2); }
+
+    /* Hamburger for mobile */
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    /* ======================================================
+       HERO SECTION
+    ====================================================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 6rem;
+    }
+    .hero-inner {
+      max-width: 820px;
+    }
+    /* Eyebrow label */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .35rem .9rem;
+      border: 1px solid rgba(6,214,160,.3);
+      border-radius: 100px;
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 2rem;
+      animation: fadeUp .8s ease both;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 8px var(--accent2);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+
+    /* Hero headline */
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      margin-bottom: 1.8rem;
+      animation: fadeUp .8s .1s ease both;
+    }
+    /* CHANGE the gradient colors of headline here */
+    .hero-headline .gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent3) 60%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 2.8rem;
+      animation: fadeUp .8s .2s ease both;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 1.9rem;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: .92rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 30px rgba(59,130,246,.35);
+    }
+    .btn-primary:hover {
+      background: #5a9cf8;
+      transform: translateY(-2px);
+      box-shadow: 0 0 45px rgba(59,130,246,.5);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.05);
+      border-color: rgba(99,179,255,.3);
+      transform: translateY(-2px);
+    }
+
+    /* Animated scan line on hero (decorative) */
+    .scanline {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: scan 6s linear infinite;
+      opacity: .4;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      from { top: 0; }
+      to   { top: 100%; }
+    }
+
+    /* Hero stats row */
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      animation: fadeUp .8s .4s ease both;
+    }
+    .stat-item {}
+    .stat-number {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 2rem;
+      background: linear-gradient(135deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label {
+      font-size: .8rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-top: .1rem;
+    }
+
+    /* ======================================================
+       SECTION SHARED STYLES
+    ====================================================== */
+    .section-label {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: .8rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+      line-height: 1.15;
+      letter-spacing: -.015em;
+      margin-bottom: 1.2rem;
+    }
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+    }
+
+    /* ======================================================
+       MARQUEE STRIP
+    ====================================================== */
+    .marquee-wrap {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      margin: 0;
+      background: rgba(59,130,246,.03);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite; /* change duration to speed up/slow down */
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .marquee-item::after {
+      content: '◆';
+      color: var(--accent);
+      font-size: .5rem;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ======================================================
+       ABOUT / PHILOSOPHY SECTION
+    ====================================================== */
+    #about { padding: 8rem 0; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    /* Brain / mind diagram — pure CSS art */
+    .mind-diagram {
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 420px;
+      position: relative;
+      margin: 0 auto;
+    }
+    .mind-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      animation: ringPulse 4s ease-in-out infinite;
+    }
+    .ring-1 {
+      width: 60%; height: 60%;
+      border-color: rgba(59,130,246,.5);
+      animation-delay: 0s;
+    }
+    .ring-2 {
+      width: 78%; height: 78%;
+      border-color: rgba(59,130,246,.25);
+      animation-delay: .5s;
+    }
+    .ring-3 {
+      width: 95%; height: 95%;
+      border-color: rgba(59,130,246,.1);
+      animation-delay: 1s;
+    }
+    @keyframes ringPulse {
+      0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+      50%      { transform: translate(-50%,-50%) scale(1.04); opacity: .6; }
+    }
+    .mind-core {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 40%;
+      height: 40%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,.3), rgba(167,139,250,.15) 60%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mind-icon {
+      font-size: 2.5rem;
+      filter: drop-shadow(0 0 20px var(--accent));
+    }
+    /* Orbiting dots */
+    .orbit-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+    }
+    .orbit-dot::before {
+      content: '';
+      position: absolute;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 12px var(--accent2);
+      transform: translate(-50%,-50%);
+    }
+    .od-1 { animation: orbit1 6s linear infinite; }
+    .od-2 { animation: orbit1 9s linear infinite reverse; }
+    .od-2::before { background: var(--accent3); box-shadow: 0 0 12px var(--accent3); }
+    .od-3 { animation: orbit1 12s linear infinite; }
+    .od-3::before { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+    @keyframes orbit1 {
+      from { transform: rotate(0deg) translateX(130px); }
+      to   { transform: rotate(360deg) translateX(130px); }
+    }
+
+    .about-text .section-sub { max-width: 480px; margin-bottom: 2rem; }
+    .pillars {
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+      margin-top: 2rem;
+    }
+    .pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.3rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: var(--transition);
+    }
+    .pillar:hover {
+      border-color: rgba(59,130,246,.3);
+      background: var(--surface2);
+      transform: translateX(6px);
+    }
+    .pillar-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .1rem; }
+    .pillar-title { font-weight: 500; font-size: .95rem; margin-bottom: .2rem; }
+    .pillar-desc { font-size: .85rem; color: var(--text-muted); }
+
+    /* ======================================================
+       SERVICES SECTION
+    ====================================================== */
+    #services { padding: 8rem 0; }
+    .services-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .services-header .section-sub { margin: 0 auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* Service card */
+    .service-card {
+      position: relative;
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(59,130,246,.06));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .service-card:hover { border-color: rgba(59,130,246,.35); transform: translateY(-6px); }
+    .service-card:hover::before { opacity: 1; }
+    /* Card glow on hover — change color per card in HTML via style attr */
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--card-accent, var(--accent));
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      background: rgba(59,130,246,.1);
+      border: 1px solid rgba(59,130,246,.2);
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: .7rem;
+    }
+    .card-desc { font-size: .92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.8rem; }
+    .card-features { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .card-features li {
+      font-size: .84rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .card-features li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--card-accent, var(--accent));
+      flex-shrink: 0;
+    }
+
+    /* ======================================================
+       PROCESS SECTION
+    ====================================================== */
+    #process { padding: 8rem 0; }
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+    }
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+      padding-bottom: 2rem;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-line {
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .step:last-child .step-line { display: none; }
+    .step-num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .85rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      background: var(--bg);
+      position: relative;
+      z-index: 1;
+    }
+    .step-content {}
+    .step-title { font-weight: 500; font-size: 1rem; margin-bottom: .3rem; }
+    .step-desc { font-size: .88rem; color: var(--text-muted); }
+
+    /* Terminal-style code block — decorative */
+    .terminal {
+      background: #060d1a;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      font-family: 'Courier New', monospace;
+      font-size: .8rem;
+    }
+    .terminal-bar {
+      background: var(--surface);
+      padding: .7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .t-dot-r { background: #ff5f57; }
+    .t-dot-y { background: #ffbd2e; }
+    .t-dot-g { background: #28ca41; }
+    .terminal-title { font-family: var(--font-body); font-size: .78rem; color: var(--text-muted); margin-left: auto; }
+    .terminal-body { padding: 1.5rem; }
+    .t-line { margin-bottom: .5rem; line-height: 1.6; }
+    .t-comment { color: #3a5a7c; }
+    .t-key { color: var(--accent3); }
+    .t-val { color: var(--accent2); }
+    .t-str { color: #e2c08d; }
+    .t-num { color: #f97583; }
+    .t-cursor {
+      display: inline-block;
+      width: 8px; height: 14px;
+      background: var(--accent);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* ======================================================
+       TESTIMONIALS
+    ====================================================== */
+    #testimonials { padding: 8rem 0; }
+    .testimonials-header { text-align: center; margin-bottom: 4rem; }
+    .testimonials-header .section-sub { margin: 0 auto; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .testi-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: var(--transition);
+    }
+    .testi-card:hover {
+      border-color: rgba(59,130,246,.25);
+      transform: translateY(-4px);
+    }
+    .testi-stars { color: var(--accent2); font-size: .9rem; margin-bottom: 1rem; letter-spacing: .1rem; }
+    .testi-quote { font-size: .93rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: .8rem; }
+    /* Avatar placeholder — replace with <img> tags */
+    .avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .85rem;
+      flex-shrink: 0;
+    }
+    .av-blue  { background: rgba(59,130,246,.2); color: var(--accent); border: 1px solid rgba(59,130,246,.3); }
+    .av-teal  { background: rgba(6,214,160,.15); color: var(--accent2); border: 1px solid rgba(6,214,160,.3); }
+    .av-violet { background: rgba(167,139,250,.15); color: var(--accent3); border: 1px solid rgba(167,139,250,.3); }
+    .author-name { font-weight: 500; font-size: .9rem; }
+    .author-role { font-size: .78rem; color: var(--text-muted); }
+
+    /* ======================================================
+       CTA SECTION
+    ====================================================== */
+    #cta { padding: 8rem 0; }
+    .cta-box {
+      position: relative;
+      padding: 5rem;
+      border: 1px solid rgba(59,130,246,.2);
+      border-radius: 20px;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(59,130,246,.06) 0%, rgba(167,139,250,.04) 100%);
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(59,130,246,.3), transparent 50%, rgba(167,139,250,.2));
+      z-index: -1;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -.015em;
+      margin-bottom: 1rem;
+    }
+    .cta-sub { color: var(--text-muted); font-size: 1.05rem; max-width: 480px; margin: 0 auto 2.5rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ======================================================
+       FOOTER
+    ====================================================== */
+    footer {
+      padding: 4rem 0 2.5rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {}
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: .08em;
+      margin-bottom: .8rem;
+    }
+    .footer-tagline { font-size: .88rem; color: var(--text-muted); max-width: 240px; }
+    .footer-col h4 {
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+    .footer-col li a {
+      font-size: .88rem;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-col li a:hover { color: var(--text); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+
+    /* ======================================================
+       SCROLL REVEAL ANIMATION
+    ====================================================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ======================================================
+       RESPONSIVE
+    ====================================================== */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .about-grid, .process-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+      .cta-box { padding: 3rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body>
-    <div class="aufbau">++++ SEITE BEFINDET SICH IM AUFBAU +++++ SITE UNDER CONSTRUCTION +++++</div>
-    <header>
-        <div class="logo">
-            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="8" stroke="#2B9EC9" stroke-width="2"/>
-                <path d="M10 8C10 7.44772 10.4477 7 11 7H13C13.5523 7 14 7.44772 14 8V16C14 16.5523 13.5523 17 13 17H11C10.4477 17 10 16.5523 10 16V8Z" fill="#2B9EC9"/>
-                <path d="M6 11C6 10.4477 6.44772 10 7 10H9C9.55228 10 10 10.4477 10 11V13C10 13.5523 9.55228 14 9 14H7C6.44772 14 6 13.5523 6 13V11Z" fill="#2B9EC9"/>
-                <path d="M14 11C14 10.4477 14.4477 10 15 10H17C17.5523 10 18 10.4477 18 11V13C18 13.5523 17.5523 14 17 14H15C14.4477 14 14 13.5523 14 13V11Z" fill="#2B9EC9"/>
-            </svg>
-            <span>WEPSYTE</span>
+
+  <!-- Decorative background elements -->
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+
+  <!-- =====================================================
+       NAVBAR
+       - Edit logo name in .nav-logo
+       - Add/remove nav links in <ul class="nav-links">
+       - Add/remove languages in .lang-dropdown <ul>
+  ===================================================== -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">COGN<span>UX</span></a>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#testimonials">Clients</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <!-- Language button — toggle dropdown on click -->
+      <div style="position:relative;">
+        <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span id="langLabel">EN</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:10px;height:10px;">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+
+        <!-- ADD or REMOVE <li> elements to add more languages -->
+        <ul class="lang-dropdown" id="langDropdown">
+          <li class="active" data-lang="EN" onclick="setLang('EN',this)">🇬🇧 English</li>
+          <li data-lang="DE" onclick="setLang('DE',this)">🇩🇪 Deutsch</li>
+          <li data-lang="FR" onclick="setLang('FR',this)">🇫🇷 Français</li>
+          <li data-lang="ES" onclick="setLang('ES',this)">🇪🇸 Español</li>
+          <li data-lang="NL" onclick="setLang('NL',this)">🇳🇱 Nederlands</li>
+        </ul>
+      </div>
+
+      <!-- Primary nav CTA -->
+      <a href="#cta" class="btn btn-primary" style="padding:.55rem 1.2rem;font-size:.85rem;">Book a Call</a>
+
+      <!-- Mobile hamburger -->
+      <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =====================================================
+       HERO
+       - Edit headline and sub-text below
+       - Adjust stats numbers
+  ===================================================== -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          UX Psychology Consulting
         </div>
-        <nav>
-            <ul>
-                <li><a href="#services">Leistungen</a></li>
-                <li><a href="#process">Prozess</a></li>
-                <li><a href="#testimonials">Referenzen</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
-        </nav>
-        <button class="cta-button">Beratung vereinbaren</button>
-    </header>
 
-    
+        <h1 class="hero-headline">
+          Design that thinks<br/>
+          like your <span class="gradient-text">users do.</span>
+        </h1>
 
-    <section class="hero">
-        <div class="neural-bg" id="neural-network"></div>
-        <div class="hero-content">
-            <h1>Psychologiebasiertes <span class="highlight">Webdesign</span> für überzeugende Nutzererfahrungen</h1>
-            <p>Wir entwickeln Websites, die nicht nur gut aussehen, sondern auf Basis psychologischer Prinzipien die Nutzerbindung und Konversion messbar steigern.</p>
-            <button class="cta-button">Unser Ansatz entdecken</button>
+        <p class="hero-sub">
+          We apply cognitive science and behavioral psychology to build digital products people intuitively love — increasing conversion, trust, and retention.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#services" class="btn btn-primary">
+            Explore Services
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </a>
+          <a href="#process" class="btn btn-ghost">How it works</a>
         </div>
-        <svg class="brain-graphic" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M400 100C250 100 150 200 150 350C150 500 250 600 400 600C550 600 650 500 650 350C650 200 550 100 400 100Z" stroke="#2B9EC9" stroke-width="2" stroke-dasharray="10 5"/>
-            <circle cx="400" cy="350" r="150" stroke="#2B9EC9" stroke-width="3"/>
-            <circle cx="400" cy="350" r="80" stroke="#2B9EC9" stroke-width="2"/>
-            <circle cx="400" cy="350" r="20" fill="#2B9EC9"/>
-            <!-- Left hemisphere connections -->
-            <line x1="300" y1="300" x2="380" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="275" y1="350" x2="380" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="300" y1="400" x2="380" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="330" y1="260" x2="380" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="330" y1="440" x2="380" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <circle cx="300" cy="300" r="8" fill="#2B9EC9"/>
-            <circle cx="275" cy="350" r="8" fill="#2B9EC9"/>
-            <circle cx="300" cy="400" r="8" fill="#2B9EC9"/>
-            <circle cx="330" cy="260" r="8" fill="#2B9EC9"/>
-            <circle cx="330" cy="440" r="8" fill="#2B9EC9"/>
-            
-            <!-- Right hemisphere connections -->
-            <line x1="500" y1="300" x2="420" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="525" y1="350" x2="420" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="500" y1="400" x2="420" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="470" y1="260" x2="420" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <line x1="470" y1="440" x2="420" y2="350" stroke="#2B9EC9" stroke-width="2"/>
-            <circle cx="500" cy="300" r="8" fill="#2B9EC9"/>
-            <circle cx="525" cy="350" r="8" fill="#2B9EC9"/>
-            <circle cx="500" cy="400" r="8" fill="#2B9EC9"/>
-            <circle cx="470" cy="260" r="8" fill="#2B9EC9"/>
-            <circle cx="470" cy="440" r="8" fill="#2B9EC9"/>
-            
-            <!-- Outer connections -->
-            <line x1="300" y1="300" x2="200" y2="230" stroke="#2B9EC9" stroke-width="1" stroke-dasharray="5 3"/>
-            <line x1="275" y1="350" x2="175" y2="350" stroke="#2B9EC9" stroke-width="1" stroke-dasharray="5 3"/>
-            <line x1="300" y1="400" x2="200" y2="470" stroke="#2B9EC9" stroke-width="1" stroke-dasharray="5 3"/>
-            <line x1="500" y1="300" x2="600" y2="230" stroke="#2B9EC9" stroke-width="1" stroke-dasharray="5 3"/>
-            <line x1="525" y1="350" x2="625" y2="350" stroke="#2B9EC9" stroke-width="1" stroke-dasharray="5 3"/>
-            <line x1="500" y1="400" x2="600" y2="470" stroke="#2B9EC9" stroke-width="1" stroke-dasharray="5 3"/>
-            <circle cx="200" cy="230" r="5" fill="#4f5d75"/>
-            <circle cx="175" cy="350" r="5" fill="#4f5d75"/>
-            <circle cx="200" cy="470" r="5" fill="#4f5d75"/>
-            <circle cx="600" cy="230" r="5" fill="#4f5d75"/>
-            <circle cx="625" cy="350" r="5" fill="#4f5d75"/>
-            <circle cx="600" cy="470" r="5" fill="#4f5d75"/>
-        </svg>
-    </section>
 
-    <section class="services" id="services">
-        <h2 class="section-title">Unsere <span class="highlight">Leistungen</span></h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" stroke="#2B9EC9" stroke-width="2"/>
-                        <path d="M12 6V18" stroke="#2B9EC9" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M6 12H18" stroke="#2B9EC9" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <h3>UX Forschung & Strategie</h3>
-                <p>Wir identifizieren mittels kognitiver Analysen und Eyetracking-Tests die entscheidenden Erfolgsfaktoren für Ihre Zielgruppe.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 18L9 12L13 16L20 8" stroke="#2B9EC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M15 8H20V13" stroke="#2B9EC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h3>Konversionsoptimiertes Design</h3>
-                <p>Unsere Designs nutzen verhaltenspsychologische Erkenntnisse, um Conversion-Raten nachweislich zu verbessern.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2B9EC9" stroke-width="2"/>
-                        <path d="M7 9C7 7.89543 7.89543 7 9 7H15C16.1046 7 17 7.89543 17 9V15C17 16.1046 16.1046 17 15 17H9C7.89543 17 7 16.1046 7 15V9Z" fill="#2B9EC9"/>
-                    </svg>
-                </div>
-                <h3>Frontend-Entwicklung</h3>
-                <p>Wir entwickeln performante, responsive und barrierefreie Websites mit modernsten Technologien.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#2B9EC9" stroke-width="2"/>
-                        <path d="M12 16V16.01" stroke="#2B9EC9" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12" stroke="#2B9EC9" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M12 8C11.4477 8 11 8.44772 11 9C11 9.55228 11.4477 10 12 10C12.5523 10 13 9.55228 13 9" stroke="#2B9EC9" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <h3>A/B-Testing & Optimierung</h3>
-                <p>Kontinuierliche Verbesserung durch datengetriebene Analysen und psychologisch fundierte Optimierungen.</p>
-            </div>
+        <!-- Stats — change numbers and labels here -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">240+</div>
+            <div class="stat-label">Projects delivered</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">38%</div>
+            <div class="stat-label">Avg. conversion lift</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">12y</div>
+            <div class="stat-label">Research experience</div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <section class="process" id="process">
-        <h2 class="section-title">Unser <span class="highlight">Prozess</span></h2>
-        <div class="process-steps">
-            <div class="process-line"></div>
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>Analyse</h3>
-                <p>Zielgruppen-Analyse und Erstellung eines psychologischen Profils Ihrer Nutzer.</p>
+      <!-- Animated scan line -->
+      <div class="scanline" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       MARQUEE STRIP — edit keyword list here
+  ===================================================== -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- Duplicate items for seamless loop — keep both copies identical -->
+      <span class="marquee-item">Cognitive Load Theory</span>
+      <span class="marquee-item">Hick's Law</span>
+      <span class="marquee-item">Gestalt Principles</span>
+      <span class="marquee-item">Mental Models</span>
+      <span class="marquee-item">Fitts's Law</span>
+      <span class="marquee-item">Affordance Design</span>
+      <span class="marquee-item">Behavioral Patterns</span>
+      <span class="marquee-item">Trust Signals</span>
+      <span class="marquee-item">Dark Pattern Removal</span>
+      <span class="marquee-item">Eye Tracking</span>
+      <!-- Duplicate -->
+      <span class="marquee-item">Cognitive Load Theory</span>
+      <span class="marquee-item">Hick's Law</span>
+      <span class="marquee-item">Gestalt Principles</span>
+      <span class="marquee-item">Mental Models</span>
+      <span class="marquee-item">Fitts's Law</span>
+      <span class="marquee-item">Affordance Design</span>
+      <span class="marquee-item">Behavioral Patterns</span>
+      <span class="marquee-item">Trust Signals</span>
+      <span class="marquee-item">Dark Pattern Removal</span>
+      <span class="marquee-item">Eye Tracking</span>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       ABOUT
+  ===================================================== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Visual diagram -->
+        <div class="about-visual reveal">
+          <div class="mind-diagram">
+            <div class="mind-ring ring-1"></div>
+            <div class="mind-ring ring-2"></div>
+            <div class="mind-ring ring-3"></div>
+            <div class="mind-core">
+              <div class="mind-icon">🧠</div>
             </div>
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>Konzeption</h3>
-                <p>Entwicklung einer Webstrategie auf Basis kognitiver Prinzipien.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>Umsetzung</h3>
-                <p>Designentwicklung und technische Implementierung mit Fokus auf Nutzererfahrung.</p>
-            </div>
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3>Optimierung</h3>
-                <p>Kontinuierliche Verbesserung durch A/B-Tests und psychologische Analysen.</p>
-            </div>
+            <div class="orbit-dot od-1"></div>
+            <div class="orbit-dot od-2"></div>
+            <div class="orbit-dot od-3"></div>
+          </div>
         </div>
-    </section>
 
-    <section class="testimonials" id="testimonials">
-        <h2 class="section-title">Kunden<span class="highlight">stimmen</span></h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <p class="testimonial-text">"Der psychologiebasierte Ansatz von WEPSYTE hat unsere Conversion-Rate um 43% gesteigert. Die Expertise im Bereich der kognitiven Wahrnehmung hat unseren Webauftritt revolutioniert."</p>
-                <div class="testimonial
+        <!-- Text -->
+        <div class="about-text reveal" style="transition-delay:.15s">
+          <span class="section-label">Our Philosophy</span>
+          <h2 class="section-title">Psychology-first,<br/>pixel-second.</h2>
+          <p class="section-sub">
+            Most interfaces fail not because of aesthetics — but because they ignore how the human brain processes information. We fix the root cause.
+          </p>
+
+          <!-- PILLARS — edit icon, title and description for each -->
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar-icon">⚡</div>
+              <div>
+                <div class="pillar-title">Cognitive Clarity</div>
+                <div class="pillar-desc">Reducing mental effort so users reach their goals faster and with less friction.</div>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">🎯</div>
+              <div>
+                <div class="pillar-title">Behavioral Precision</div>
+                <div class="pillar-desc">Applying proven psychological models to nudge behavior without manipulation.</div>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">🔬</div>
+              <div>
+                <div class="pillar-title">Evidence-Based Design</div>
+                <div class="pillar-desc">Every recommendation is grounded in research, tested, and measurable.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SERVICES
+       - Duplicate or remove .service-card blocks to add/remove services
+       - Change --card-accent CSS variable per card for color theming
+  ===================================================== -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <span class="section-label">What We Offer</span>
+        <h2 class="section-title">Three ways we transform<br/>your digital experience.</h2>
+        <p class="section-sub">From strategic consulting to hands-on implementation — we embed psychology into every layer of your product.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- SERVICE 1: Consultations -->
+        <div class="service-card reveal" style="--card-accent: #3b82f6;" >
+          <div class="card-icon">🔍</div>
+          <div class="card-title">UX Consultation</div>
+          <p class="card-desc">Deep-dive audits and strategic guidance on your existing or planned digital products.</p>
+          <ul class="card-features">
+            <li>Heuristic UX audit</li>
+            <li>Cognitive friction analysis</li>
+            <li>Competitive benchmarking</li>
+            <li>Actionable roadmap</li>
+          </ul>
+        </div>
+
+        <!-- SERVICE 2: Workshops -->
+        <div class="service-card reveal" style="--card-accent: #a78bfa; transition-delay:.1s;">
+          <div class="card-icon" style="background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.2);">🧪</div>
+          <div class="card-title">Workshops</div>
+          <p class="card-desc">Interactive sessions that upskill your team to think and design with behavioral science.</p>
+          <ul class="card-features">
+            <li>Psychology of persuasion</li>
+            <li>Cognitive bias toolkit</li>
+            <li>UX research methods</li>
+            <li>Hands-on design sprints</li>
+          </ul>
+        </div>
+
+        <!-- SERVICE 3: Design & Websites -->
+        <div class="service-card reveal" style="--card-accent: #06d6a0; transition-delay:.2s;">
+          <div class="card-icon" style="background:rgba(6,214,160,.1);border-color:rgba(6,214,160,.2);">🖥️</div>
+          <div class="card-title">Design & Websites</div>
+          <p class="card-desc">Full-cycle UI/UX design and development — built on behavioral principles from day one.</p>
+          <ul class="card-features">
+            <li>User research & personas</li>
+            <li>Wireframes & prototypes</li>
+            <li>Psychology-led visual design</li>
+            <li>Frontend development</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       PROCESS
+  ===================================================== -->
+  <section id="process">
+    <div class="container">
+      <div class="process-grid">
+        <div>
+          <span class="section-label reveal">Our Process</span>
+          <h2 class="section-title reveal">From insight<br/>to impact.</h2>
+          <p class="section-sub reveal" style="margin-bottom:0;">A structured, research-backed methodology that transforms observations into measurable UX improvements.</p>
+
+          <!-- STEPS — edit number, title and description here -->
+          <div class="process-steps">
+            <div class="step reveal">
+              <div class="step-num">01</div>
+              <div class="step-line"></div>
+              <div class="step-content">
+                <div class="step-title">Discover & Listen</div>
+                <div class="step-desc">We conduct user interviews, session analysis, and behavioral data review to understand where and why users fail.</div>
+              </div>
+            </div>
+            <div class="step reveal">
+              <div class="step-num">02</div>
+              <div class="step-line"></div>
+              <div class="step-content">
+                <div class="step-title">Diagnose & Model</div>
+                <div class="step-desc">Map cognitive bottlenecks against psychological frameworks — Fogg, AIDA, dual-process theory and more.</div>
+              </div>
+            </div>
+            <div class="step reveal">
+              <div class="step-num">03</div>
+              <div class="step-line"></div>
+              <div class="step-content">
+                <div class="step-title">Design & Prototype</div>
+                <div class="step-desc">Create evidence-based solutions — from micro-copy to full interface redesigns — and validate with rapid testing.</div>
+              </div>
+            </div>
+            <div class="step reveal">
+              <div class="step-num">04</div>
+              <div class="step-content">
+                <div class="step-title">Measure & Iterate</div>
+                <div class="step-desc">Track KPIs, run A/B tests, and continuously refine until the numbers confirm the psychology.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal — decorative code block; edit display text only -->
+        <div class="reveal" style="transition-delay:.2s;">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <div class="t-dot t-dot-r"></div>
+              <div class="t-dot t-dot-y"></div>
+              <div class="t-dot t-dot-g"></div>
+              <span class="terminal-title">ux-audit.js</span>
+            </div>
+            <div class="terminal-body">
+              <div class="t-line"><span class="t-comment">// COGNUX Behavioral Audit Engine</span></div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-key">const</span> audit = <span class="t-val">new</span> <span class="t-str">CognuxAudit</span>({</div>
+              <div class="t-line">&nbsp;&nbsp;<span class="t-key">target</span>: <span class="t-str">"client-app"</span>,</div>
+              <div class="t-line">&nbsp;&nbsp;<span class="t-key">models</span>: [<span class="t-str">"gestalt"</span>, <span class="t-str">"fogg"</span>, <span class="t-str">"dual-process"</span>],</div>
+              <div class="t-line">&nbsp;&nbsp;<span class="t-key">depth</span>: <span class="t-num">3</span>,</div>
+              <div class="t-line">});</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-comment">// Running cognitive load analysis…</span></div>
+              <div class="t-line"><span class="t-key">const</span> result = <span class="t-val">await</span> audit.<span class="t-str">analyze</span>();</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-comment">// Results</span></div>
+              <div class="t-line"><span class="t-key">console</span>.<span class="t-val">log</span>({</div>
+              <div class="t-line">&nbsp;&nbsp;<span class="t-key">frictionPoints</span>: <span class="t-num">7</span>,</div>
+              <div class="t-line">&nbsp;&nbsp;<span class="t-key">trustScore</span>: <span class="t-num">62</span>,</div>
+              <div class="t-line">&nbsp;&nbsp;<span class="t-key">conversionLift</span>: <span class="t-str">"+34%"</span>,</div>
+              <div class="t-line">&nbsp;&nbsp;<span class="t-key">recommendation</span>: <span class="t-str">"redesign onboarding flow"</span></div>
+              <div class="t-line">});</div>
+              <div class="t-line">&nbsp;</div>
+              <div class="t-line"><span class="t-comment">// Generating report…</span></div>
+              <div class="t-line"><span class="t-key">export</span> audit.<span class="t-str">report</span>(); <span class="t-cursor"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       TESTIMONIALS
+       - Edit quote, name, role and avatar initials below
+       - Replace .avatar divs with <img> for real photos
+  ===================================================== -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <span class="section-label">Client Stories</span>
+        <h2 class="section-title">Trusted by product teams<br/>who demand results.</h2>
+        <p class="section-sub">We work with startups and enterprises alike — from initial concepts to scaled platforms.</p>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"COGNUX completely changed how our team thinks about design. The workshop alone cut our support tickets by 30% in two months."</p>
+          <div class="testi-author">
+            <div class="avatar av-blue">MR</div>
+            <div>
+              <div class="author-name">Marcus Reinhardt</div>
+              <div class="author-role">Head of Product · Fintech Scale-up</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="transition-delay:.1s;">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Their UX audit revealed friction points we'd been ignoring for years. Three months later, our checkout conversion rate is up 41%."</p>
+          <div class="testi-author">
+            <div class="avatar av-teal">SK</div>
+            <div>
+              <div class="author-name">Selin Kaya</div>
+              <div class="author-role">CPO · E-commerce Platform</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="transition-delay:.2s;">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Rare expertise that bridges academic psychology and real product decisions. The redesign they delivered is the best work we've shipped."</p>
+          <div class="testi-author">
+            <div class="avatar av-violet">TB</div>
+            <div>
+              <div class="author-name">Tobias Beck</div>
+              <div class="author-role">CEO · SaaS Startup</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       CTA SECTION
+       - Edit headline, text and button labels here
+  ===================================================== -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-box reveal">
+        <span class="section-label" style="display:block;margin-bottom:.8rem;">Get Started</span>
+        <h2 class="cta-title">Ready to design for<br/>the human brain?</h2>
+        <p class="cta-sub">Book a free 30-minute discovery call. We'll diagnose your biggest UX challenge and outline a path forward.</p>
+        <div class="cta-btns">
+          <a href="mailto:hello@cognux.io" class="btn btn-primary">
+            Book a Free Call
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </a>
+          <a href="#services" class="btn btn-ghost">View Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+       - Edit company info, links and social icons here
+  ===================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="footer-logo">COGN<span style="color:var(--accent2)">UX</span></div>
+          <p class="footer-tagline">Where cognitive science meets great product design. Based in Berlin, serving globally.</p>
+        </div>
+
+        <!-- FOOTER LINK COLUMNS — edit titles and links here -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">UX Consultation</a></li>
+            <li><a href="#services">Workshops</a></li>
+            <li><a href="#services">Design & Websites</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#testimonials">Clients</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@cognux.io">hello@cognux.io</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <!-- Edit copyright year and company name -->
+        <span>© 2025 COGNUX GmbH. All rights reserved.</span>
+        <span>Psychology-first. Always.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ===================================================== -->
+  <script>
+    // ---- Scroll reveal ----
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ---- Navbar scroll effect ----
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.style.padding = window.scrollY > 60 ? '.75rem 2rem' : '1.1rem 2rem';
+    });
+
+    // ---- Language selector ----
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+    const langLabel = document.getElementById('langLabel');
+
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = langDropdown.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', () => {
+      langDropdown.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+
+    // setLang — called from language dropdown items
+    // To hook this up to real i18n, replace console.log with your translation call
+    function setLang(code, el) {
+      langLabel.textContent = code;
+      document.querySelectorAll('.lang-dropdown li').forEach(li => li.classList.remove('active'));
+      el.classList.add('active');
+      langDropdown.classList.remove('open');
+      // TODO: trigger translation here, e.g. i18n.changeLanguage(code)
+      console.log('Language selected:', code);
+    }
+
+    // ---- Mobile nav toggle ----
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.style.display === 'flex';
+      navLinks.style.display = open ? 'none' : 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '100%';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = 'rgba(5,8,15,.97)';
+      navLinks.style.padding = '1.5rem 2rem';
+      navLinks.style.borderBottom = '1px solid rgba(99,179,255,.12)';
+      if (open) navLinks.style.display = 'none';
+    });
+
+    // ---- Smooth scroll for nav links ----
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
